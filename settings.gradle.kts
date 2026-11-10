@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BtFinder"
 include(":app")
+include(":belegscan")
