@@ -16,6 +16,14 @@ class Settings(private val context: Context) {
         get() = prefs.getString("email", null) ?: DEFAULT_EMAIL
         set(v) = prefs.edit().putString("email", v.trim()).apply()
 
+    var vatId: String
+        get() = prefs.getString("vatId", null) ?: DEFAULT_VAT_ID
+        set(v) = prefs.edit().putString("vatId", v.trim()).apply()
+
+    var taxNumber: String
+        get() = prefs.getString("taxNumber", null) ?: DEFAULT_TAX_NUMBER
+        set(v) = prefs.edit().putString("taxNumber", v.trim()).apply()
+
     var submitter: String
         get() = prefs.getString("submitter", "") ?: ""
         set(v) = prefs.edit().putString("submitter", v.trim()).apply()
@@ -40,6 +48,9 @@ class Settings(private val context: Context) {
     companion object {
         /** Voreingestellter Empfänger; in den Einstellungen änderbar. */
         const val DEFAULT_EMAIL = "buchhaltung@sikosln.de"
+
+        const val DEFAULT_VAT_ID = "DE338376508"
+        const val DEFAULT_TAX_NUMBER = "166/240/18625"
 
         const val DEFAULT_ACCOUNTS =
             "Kfz-Betriebskosten (Kraftstoff)\nKfz-Reparaturen\nReisekosten\nBewirtung\n" +

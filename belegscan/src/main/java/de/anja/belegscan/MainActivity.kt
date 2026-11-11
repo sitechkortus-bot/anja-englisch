@@ -372,6 +372,8 @@ class MainActivity : Activity() {
         settings.lastAccount = account
         val voucher = Voucher(
             company = settings.company,
+            vatId = settings.vatId,
+            taxNumber = settings.taxNumber,
             date = date,
             merchant = merchantEdit.text.toString().trim(),
             purpose = purposeEdit.text.toString().trim(),

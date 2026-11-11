@@ -15,6 +15,8 @@ import java.io.File
 /** Alles, was auf dem Belegblatt steht. */
 data class Voucher(
     val company: String,
+    val vatId: String,
+    val taxNumber: String,
     val date: String,
     val merchant: String,
     val purpose: String,
@@ -137,6 +139,14 @@ object PdfBuilder {
             "Originalquittung bitte an dieses Blatt heften.",
             LEFT, PAGE_H - BOTTOM, text(8f, color = Color.GRAY)
         )
+        val tax = listOfNotNull(
+            v.vatId.takeIf { it.isNotEmpty() }?.let { "USt-IdNr. $it" },
+            v.taxNumber.takeIf { it.isNotEmpty() }?.let { "St.-Nr. $it" },
+        ).joinToString("  ·  ")
+        if (tax.isNotEmpty()) {
+            val tp = text(8f, color = Color.GRAY).apply { textAlign = Paint.Align.RIGHT }
+            c.drawText(tax, PAGE_W - RIGHT, PAGE_H - BOTTOM, tp)
+        }
     }
 
     private fun text(size: Float, bold: Boolean = false, color: Int = Color.BLACK) =

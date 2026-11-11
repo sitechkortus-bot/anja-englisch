@@ -20,6 +20,8 @@ class SettingsActivity : Activity() {
     private lateinit var company: EditText
     private lateinit var email: EditText
     private lateinit var submitter: EditText
+    private lateinit var vatId: EditText
+    private lateinit var taxNumber: EditText
     private lateinit var accounts: EditText
     private lateinit var logoView: ImageView
     private lateinit var logoHint: TextView
@@ -47,6 +49,15 @@ class SettingsActivity : Activity() {
         form.addView(Ui.label(this, "Firmenname (steht im Kopf des Belegblatts)"))
         company = Ui.edit(this, "Firma GmbH").apply { setText(settings.company) }
         form.addView(company)
+
+        form.addView(Ui.label(this, "USt-IdNr. (steht in der Fußzeile des Belegblatts)"))
+        vatId = Ui.edit(this, "DE123456789", InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
+            .apply { setText(settings.vatId) }
+        form.addView(vatId)
+
+        form.addView(Ui.label(this, "Steuernummer"))
+        taxNumber = Ui.edit(this, "123/456/78901").apply { setText(settings.taxNumber) }
+        form.addView(taxNumber)
 
         form.addView(Ui.label(this, "Dein Name (\"Eingereicht von\")"))
         submitter = Ui.edit(
@@ -123,6 +134,8 @@ class SettingsActivity : Activity() {
         settings.email = mail
         settings.company = company.text.toString()
         settings.submitter = submitter.text.toString()
+        settings.vatId = vatId.text.toString()
+        settings.taxNumber = taxNumber.text.toString()
         settings.accountsText = accounts.text.toString()
         toast("Gespeichert")
         finish()
