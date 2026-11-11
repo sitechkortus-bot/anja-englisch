@@ -16,6 +16,10 @@ class Settings(private val context: Context) {
         get() = prefs.getString("email", null) ?: DEFAULT_EMAIL
         set(v) = prefs.edit().putString("email", v.trim()).apply()
 
+    var address: String
+        get() = prefs.getString("address", null) ?: DEFAULT_ADDRESS
+        set(v) = prefs.edit().putString("address", v.trim()).apply()
+
     var vatId: String
         get() = prefs.getString("vatId", null) ?: DEFAULT_VAT_ID
         set(v) = prefs.edit().putString("vatId", v.trim()).apply()
@@ -49,6 +53,7 @@ class Settings(private val context: Context) {
         /** Voreingestellter Empfänger; in den Einstellungen änderbar. */
         const val DEFAULT_EMAIL = "buchhaltung@sikosln.de"
 
+        const val DEFAULT_ADDRESS = "Brauhof 3, 04626 Schmölln"
         const val DEFAULT_VAT_ID = "DE338376508"
         const val DEFAULT_TAX_NUMBER = "166/240/18625"
 

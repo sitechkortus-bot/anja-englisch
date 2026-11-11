@@ -20,6 +20,7 @@ class SettingsActivity : Activity() {
     private lateinit var company: EditText
     private lateinit var email: EditText
     private lateinit var submitter: EditText
+    private lateinit var address: EditText
     private lateinit var vatId: EditText
     private lateinit var taxNumber: EditText
     private lateinit var accounts: EditText
@@ -49,6 +50,11 @@ class SettingsActivity : Activity() {
         form.addView(Ui.label(this, "Firmenname (steht im Kopf des Belegblatts)"))
         company = Ui.edit(this, "Firma GmbH").apply { setText(settings.company) }
         form.addView(company)
+
+        form.addView(Ui.label(this, "Anschrift (steht unter dem Firmennamen)"))
+        address = Ui.edit(this, "Straße Nr., PLZ Ort", InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS)
+            .apply { setText(settings.address) }
+        form.addView(address)
 
         form.addView(Ui.label(this, "USt-IdNr. (steht in der Fußzeile des Belegblatts)"))
         vatId = Ui.edit(this, "DE123456789", InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
@@ -134,6 +140,7 @@ class SettingsActivity : Activity() {
         settings.email = mail
         settings.company = company.text.toString()
         settings.submitter = submitter.text.toString()
+        settings.address = address.text.toString()
         settings.vatId = vatId.text.toString()
         settings.taxNumber = taxNumber.text.toString()
         settings.accountsText = accounts.text.toString()

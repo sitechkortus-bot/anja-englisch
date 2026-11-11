@@ -15,6 +15,7 @@ import java.io.File
 /** Alles, was auf dem Belegblatt steht. */
 data class Voucher(
     val company: String,
+    val address: String,
     val vatId: String,
     val taxNumber: String,
     val date: String,
@@ -63,12 +64,22 @@ object PdfBuilder {
         if (logo != null) {
             fit(c, logo, RectF(LEFT, TOP, LEFT + 200f, TOP + headH), bitmapPaint, alignLeft = true, alignTop = false)
         }
-        if (v.company.isNotEmpty()) {
-            val tp = text(if (logo == null) 18f else 12f, bold = true, color = accent)
+        run {
+            // Firmenname und Anschrift als Block, unten bündig mit dem Logo
             val x = if (logo == null) LEFT else LEFT + 215f
             val w = (PAGE_W - RIGHT - x).toInt()
-            val layout = layout(v.company, tp, w, if (logo == null) Layout.Alignment.ALIGN_NORMAL else Layout.Alignment.ALIGN_OPPOSITE)
-            c.save(); c.translate(x, TOP + headH - layout.height); layout.draw(c); c.restore()
+            val align = if (logo == null) Layout.Alignment.ALIGN_NORMAL else Layout.Alignment.ALIGN_OPPOSITE
+            val blocks = listOfNotNull(
+                v.company.takeIf { it.isNotEmpty() }
+                    ?.let { layout(it, text(if (logo == null) 18f else 12f, bold = true, color = accent), w, align) },
+                v.address.takeIf { it.isNotEmpty() }
+                    ?.let { layout(it, text(9f, color = Color.DKGRAY), w, align) },
+            )
+            var by = TOP + headH - blocks.sumOf { it.height }
+            for (b in blocks) {
+                c.save(); c.translate(x, by); b.draw(c); c.restore()
+                by += b.height
+            }
         }
         var y = TOP + headH + 10f
         c.drawLine(LEFT, y, PAGE_W - RIGHT, y, linePaint)

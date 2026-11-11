@@ -372,6 +372,7 @@ class MainActivity : Activity() {
         settings.lastAccount = account
         val voucher = Voucher(
             company = settings.company,
+            address = settings.address,
             vatId = settings.vatId,
             taxNumber = settings.taxNumber,
             date = date,
