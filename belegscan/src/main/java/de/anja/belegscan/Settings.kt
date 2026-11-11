@@ -13,7 +13,7 @@ class Settings(private val context: Context) {
         set(v) = prefs.edit().putString("company", v.trim()).apply()
 
     var email: String
-        get() = prefs.getString("email", "") ?: ""
+        get() = prefs.getString("email", null) ?: DEFAULT_EMAIL
         set(v) = prefs.edit().putString("email", v.trim()).apply()
 
     var submitter: String
@@ -38,6 +38,9 @@ class Settings(private val context: Context) {
     val isComplete: Boolean get() = email.isNotEmpty()
 
     companion object {
+        /** Voreingestellter Empfänger; in den Einstellungen änderbar. */
+        const val DEFAULT_EMAIL = "buchhaltung@sikosln.de"
+
         const val DEFAULT_ACCOUNTS =
             "Kfz-Betriebskosten (Kraftstoff)\nKfz-Reparaturen\nReisekosten\nBewirtung\n" +
                 "Bürobedarf\nPorto\nWerkzeug / Kleinmaterial\nSonstiges"
