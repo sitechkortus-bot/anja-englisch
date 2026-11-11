@@ -62,11 +62,11 @@ object PdfBuilder {
         // ----- Kopf: Logo links, Firmenname rechts -----
         val headH = 60f
         if (logo != null) {
-            fit(c, logo, RectF(LEFT, TOP, LEFT + 200f, TOP + headH), bitmapPaint, alignLeft = true, alignTop = false)
+            fit(c, logo, RectF(LEFT, TOP, LEFT + 300f, TOP + headH), bitmapPaint, alignLeft = true, alignTop = false)
         }
         run {
             // Firmenname und Anschrift als Block, unten bündig mit dem Logo
-            val x = if (logo == null) LEFT else LEFT + 215f
+            val x = if (logo == null) LEFT else LEFT + 315f
             val w = (PAGE_W - RIGHT - x).toInt()
             val align = if (logo == null) Layout.Alignment.ALIGN_NORMAL else Layout.Alignment.ALIGN_OPPOSITE
             val blocks = listOfNotNull(

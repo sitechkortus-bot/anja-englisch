@@ -83,7 +83,7 @@ class SettingsActivity : Activity() {
         logoHint = TextView(this).apply { textSize = 14f }
         form.addView(logoView)
         form.addView(logoHint)
-        form.addView(Ui.button(this, "Logo auswählen …").apply {
+        form.addView(Ui.button(this, "Anderes Logo auswählen …").apply {
             setOnClickListener {
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
@@ -96,7 +96,7 @@ class SettingsActivity : Activity() {
                 }
             }
         })
-        form.addView(Ui.button(this, "Logo entfernen").apply {
+        form.addView(Ui.button(this, "Mitgeliefertes Logo wiederherstellen").apply {
             setOnClickListener { settings.logoFile.delete(); showLogo() }
         })
 
@@ -123,11 +123,10 @@ class SettingsActivity : Activity() {
     }
 
     private fun showLogo() {
-        val bmp = Ui.loadBitmap(this, settings.logoFile, 600)
+        val bmp = Ui.loadLogo(this, settings, 1200)
         logoView.setImageBitmap(bmp)
         logoView.visibility = if (bmp != null) android.view.View.VISIBLE else android.view.View.GONE
-        logoHint.text = if (bmp != null) "" else "Noch kein Logo hinterlegt."
-        logoHint.visibility = if (bmp != null) android.view.View.GONE else android.view.View.VISIBLE
+        logoHint.text = if (settings.logoFile.exists()) "Eigenes Logo" else "Mitgeliefertes Firmenlogo"
     }
 
     private fun save() {

@@ -72,6 +72,11 @@ object Ui {
         null
     }
 
+    /** Eigenes Logo aus den Einstellungen, sonst das mitgelieferte Firmenlogo. */
+    fun loadLogo(context: Context, settings: Settings, maxSide: Int): Bitmap? =
+        loadBitmap(context, settings.logoFile, maxSide)
+            ?: BitmapFactory.decodeResource(context.resources, R.drawable.logo_default)
+
     fun loadBitmap(context: Context, file: File, maxSide: Int): Bitmap? =
         if (file.exists()) loadBitmap(context, Uri.fromFile(file), maxSide) else null
 }

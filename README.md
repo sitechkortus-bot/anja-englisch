@@ -25,8 +25,8 @@ Ablauf:
 3. **PDF erstellen und senden** – A4-Blatt mit Firmenlogo, Belegdaten und Quittungsbild; die
    E-Mail-App öffnet sich mit hinterlegter Adresse, Betreff, Text und PDF im Anhang.
 
-Einmalig unter **Einstellungen**: E-Mail-Adresse der Buchhaltung, Firmenname, eigener Name,
-Logo (PNG/JPG) und die Kostenkonten (eines pro Zeile, z. B. `4530 Kfz-Betriebskosten`).
+Einmalig unter **Einstellungen**: eigener Name, bei Bedarf Firmenname und
+die Kostenkonten (eines pro Zeile, z. B. `4530 Kfz-Betriebskosten`).
 
 Grenzen: Die Erkennung ist ein Vorschlag, keine Garantie – Betrag und Datum vor dem Senden
 prüfen. Der Scanner braucht Google Play-Dienste. Es werden keine Daten an Dritte übertragen;

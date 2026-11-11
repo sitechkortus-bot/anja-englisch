@@ -111,8 +111,8 @@ class MainActivity : Activity() {
         }
 
         setupHint = TextView(this).apply {
-            text = "Bitte zuerst in den Einstellungen die E-Mail-Adresse der Buchhaltung, " +
-                "das Logo und die Kostenkonten hinterlegen. Hier tippen."
+            text = "Bitte zuerst in den Einstellungen die E-Mail-Adresse der Buchhaltung " +
+                "hinterlegen. Hier tippen."
             textSize = 15f
             setTextColor(Color.rgb(140, 70, 0))
             setBackgroundColor(Color.rgb(255, 243, 205))
@@ -387,7 +387,7 @@ class MainActivity : Activity() {
         )
         val pdf = File(File(filesDir, "belege"), fileName(voucher))
         try {
-            PdfBuilder.write(pdf, voucher, Ui.loadBitmap(this, settings.logoFile, 1000), receipt)
+            PdfBuilder.write(pdf, voucher, Ui.loadLogo(this, settings, 1200), receipt)
         } catch (e: Exception) {
             toast("PDF konnte nicht erstellt werden: ${e.message}")
             return
