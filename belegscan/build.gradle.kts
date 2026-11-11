@@ -15,6 +15,17 @@ android {
         versionName = "1.0"
     }
 
+    // Fester Test-Schlüssel im Repo: so lässt sich jede neue APK über die alte installieren,
+    // ohne die App vorher zu löschen. Kein Geheimnis – nicht für eine Store-Veröffentlichung.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
